@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estudos — Vinicius Paz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing: border-box; }
+  body{
+    margin:0;
+    background: #ffffff;
+    color: #1a1a1a;
+    font-family: 'EB Garamond', serif;
+    min-height: 100vh;
+  }
+  .wrap{
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 70px 24px 80px;
+  }
+  .voltar{
+    display:block;
+    text-align:center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #1a3fd6;
+    text-decoration: underline;
+    margin-bottom: 40px;
+  }
+  h1{
+    text-align: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(30px, 5vw, 42px);
+    margin: 0 0 8px;
+  }
+  .sub{
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #666;
+    margin: 0 0 50px;
+  }
+
+  .composer{
+    background: #FAF9F5;
+    border: 1px solid #E0DDD3;
+    padding: 26px 28px 20px;
+    margin-bottom: 60px;
+  }
+  .linha-dupla{
+    display:flex;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .linha-dupla input{ flex: 1; min-width: 0; }
+  input#materia, input#autor{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #E0DDD3;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #1a1a1a;
+    padding: 4px 2px 8px;
+  }
+  input#materia::placeholder, input#autor::placeholder{ color: #999; }
+  input#materia:focus, input#autor:focus{ outline:none; border-bottom-color: #1a3fd6; }
+
+  textarea#dica{
+    width: 100%;
+    min-height: 160px;
+    background: transparent;
+    border: none;
+    resize: vertical;
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #1a1a1a;
+  }
+  textarea#dica:focus{ outline: none; }
+  textarea#dica::placeholder{ color: #999; font-style: italic; }
+
+  .barra{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed #E0DDD3;
+  }
+  .contador{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #999;
+  }
+  button#postar{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  button#postar:hover{ background: #1a3fd6; }
+  button#postar:disabled{ background: #ddd; color: #999; cursor: default; }
+
+  .lista-titulo{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 18px;
+  }
+  .vazio{
+    font-style: italic;
+    color: #999;
+    font-size: 16px;
+    padding: 20px 0;
+  }
+  .dica-card{
+    border: 1px solid #E0DDD3;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+  .dica-materia{
+    display:inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #1a3fd6;
+    border: 1px solid #c9d3f7;
+    background: #F1F4FF;
+    padding: 2px 8px;
+    margin-bottom: 12px;
+  }
+  .dica-texto{
+    font-size: 18px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    margin: 0 0 14px;
+  }
+  .dica-rodape{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #999;
+  }
+  .apagar{
+    background: none;
+    border: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #999;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+  }
+  .apagar:hover{ color: #1a3fd6; }
+
+  .aviso{
+    text-align:center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #999;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="voltar" href="index.html">← voltar</a>
+
+  <h1>Estudos</h1>
+  <p class="sub">dicas para concursos e provas</p>
+
+  <div class="composer">
+    <div class="linha-dupla">
+      <input id="materia" type="text" placeholder="matéria / concurso (ex: português, TRT, PRF)" maxlength="40">
+      <input id="autor" type="text" placeholder="seu nome (opcional)" maxlength="40">
+    </div>
+    <textarea id="dica" placeholder="escreva sua dica de estudo..."></textarea>
+    <div class="barra">
+      <span class="contador" id="contador">0 caracteres</span>
+      <button id="postar" disabled>Postar dica</button>
+    </div>
+  </div>
+
+  <div class="lista-titulo">dicas publicadas</div>
+  <div id="lista"><div class="vazio">carregando...</div></div>
+
+  <div class="aviso">as dicas postadas aqui ficam visíveis para todos que abrirem esta página.</div>
+
+</div>
+
+<script>
+const textarea = document.getElementById('dica');
+const materiaInput = document.getElementById('materia');
+const autorInput = document.getElementById('autor');
+const botao = document.getElementById('postar');
+const contador = document.getElementById('contador');
+const lista = document.getElementById('lista');
+
+textarea.addEventListener('input', () => {
+  const n = textarea.value.trim().length;
+  contador.textContent = n + (n === 1 ? ' caractere' : ' caracteres');
+  botao.disabled = n === 0;
+});
+
+function escapeHtml(str){
+  return str.replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
+
+function formatarData(iso){
+  const d = new Date(iso);
+  return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
+async function pegarMeusIds(){
+  try{
+    const r = await window.storage.get('minhas-dicas', false);
+    return r ? JSON.parse(r.value) : [];
+  }catch(e){
+    return [];
+  }
+}
+
+async function salvarMeuId(id){
+  const meus = await pegarMeusIds();
+  meus.push(id);
+  try{
+    await window.storage.set('minhas-dicas', JSON.stringify(meus), false);
+  }catch(e){
+    console.error('erro ao salvar id local', e);
+  }
+}
+
+async function removerMeuId(id){
+  const meus = await pegarMeusIds();
+  const atualizados = meus.filter(x => x !== id);
+  try{
+    await window.storage.set('minhas-dicas', JSON.stringify(atualizados), false);
+  }catch(e){
+    console.error('erro ao atualizar ids locais', e);
+  }
+}
+
+async function carregarLista(){
+  lista.innerHTML = '<div class="vazio">carregando...</div>';
+  try{
+    const chaves = await window.storage.list('dica:', true);
+    if(!chaves || !chaves.keys || chaves.keys.length === 0){
+      lista.innerHTML = '<div class="vazio">nenhuma dica publicada ainda. seja o primeiro.</div>';
+      return;
+    }
+    const meus = await pegarMeusIds();
+    const dicas = [];
+    for(const chave of chaves.keys){
+      try{
+        const r = await window.storage.get(chave, true);
+        if(r) dicas.push(JSON.parse(r.value));
+      }catch(e){}
+    }
+    dicas.sort((a,b) => new Date(b.data) - new Date(a.data));
+
+    if(dicas.length === 0){
+      lista.innerHTML = '<div class="vazio">nenhuma dica publicada ainda. seja o primeiro.</div>';
+      return;
+    }
+
+    lista.innerHTML = '';
+    for(const d of dicas){
+      const card = document.createElement('div');
+      card.className = 'dica-card';
+      const ehMinha = meus.includes(d.id);
+      card.innerHTML = `
+        ${d.materia ? `<span class="dica-materia">${escapeHtml(d.materia)}</span>` : ''}
+        <p class="dica-texto">${escapeHtml(d.texto)}</p>
+        <div class="dica-rodape">
+          <span>${escapeHtml(d.autor || 'anônimo')} · ${formatarData(d.data)}</span>
+          ${ehMinha ? `<button class="apagar" data-id="${d.id}">apagar</button>` : ''}
+        </div>
+      `;
+      lista.appendChild(card);
+    }
+
+    lista.querySelectorAll('.apagar').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.getAttribute('data-id');
+        try{
+          await window.storage.delete('dica:' + id, true);
+          await removerMeuId(id);
+          carregarLista();
+        }catch(e){
+          console.error('erro ao apagar dica', e);
+        }
+      });
+    });
+  }catch(e){
+    lista.innerHTML = '<div class="vazio">não foi possível carregar as dicas agora.</div>';
+    console.error(e);
+  }
+}
+
+botao.addEventListener('click', async () => {
+  const texto = textarea.value.trim();
+  if(!texto) return;
+  const materia = materiaInput.value.trim();
+  const autor = autorInput.value.trim();
+  const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+  const dica = { id, texto, materia, autor, data: new Date().toISOString() };
+
+  botao.disabled = true;
+  botao.textContent = 'Postando...';
+  try{
+    const resultado = await window.storage.set('dica:' + id, JSON.stringify(dica), true);
+    if(!resultado){
+      throw new Error('falha ao salvar');
+    }
+    await salvarMeuId(id);
+    textarea.value = '';
+    materiaInput.value = '';
+    autorInput.value = '';
+    contador.textContent = '0 caracteres';
+    carregarLista();
+  }catch(e){
+    console.error('erro ao postar dica', e);
+    alert('não foi possível postar a dica agora. tente novamente.');
+  }finally{
+    botao.textContent = 'Postar dica';
+    botao.disabled = textarea.value.trim().length === 0;
+  }
+});
+
+carregarLista();
+</script>
+</body>
+</html>
